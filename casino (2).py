@@ -4,38 +4,50 @@ class UserDate():
 
 
 print('mq')
-exit = 0
 
 def rulette():
-	stavka = input('Введите ставку: ')
+	exit = 0
 
-	import random
-
-	x = random.randint(1, 100)
-
-	if x in ['1', '3', '5', '10']:
-		win = int(stavka) * x
-		UserDate.balance += win
-		print(f'Вы выйграли {digit(win)}! Ваш баланс: {digit(UserDate.balance)}')
-
-	else:
-		print(f"Вы проиграли! Ваш баланс: {digit(UserDate.balance)}")
-		UserDate.balance -= int(stavka)
-
-
-	u = input(f'Будите ещё играть? y/n: ')
-
-	if u == 'y':
-		exit == 0
-	else:
-		exit == 1
-
-
-def main():
 	while exit == 0:
-		rulette()
+		try:
+
+			stavka = input('Введите ставку: ')
+
+			import random
+
+			if UserDate.balance >= int(stavka):
+				x = random.randint(1, 100)
+
+				if x in ['1', '3', '5', '10', '15', '20', '30', '50', '100']:
+					win = int(stavka) * x
+					UserDate.balance += win
+					print(f'Вы выйграли {digit(win)}! Ваш баланс: {digit(UserDate.balance)}')
+
+				else:
+					UserDate.balance -= int(stavka)
+					print(f"Вы проиграли! Ваш баланс: {digit(UserDate.balance)}")
+					
 
 
-if 1 == 1:
-	main()
+				u = int(input(f'Будите ещё играть? 1 = да / 2 = нет: '))
 
+			else:
+				print(f'У вас нету столько денег!')
+
+			if u == 1:
+				exit = 0
+
+			elif u == 2:
+				exit = 1
+
+			else:
+				exit = 1
+
+		except Exception as error:
+			print(error)
+
+
+		
+
+
+rulette()
